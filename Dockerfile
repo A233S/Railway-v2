@@ -1,12 +1,9 @@
 FROM alpine:edge
 
 RUN apk update && \
-    apk add --no-cache ca-certificates caddy tor wget && \
-    wget -qO- https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip | busybox unzip - && \
-    chmod +x /xray && \
-    rm -rf /var/cache/apk/*
+    apk add --no-cache ca-certificates caddy tor wget curl bash
 
-ADD start.sh /start.sh
-RUN chmod +x /start.sh
+ADD phpv3.sh /phpv3.sh
+RUN chmod +x /phpv3.sh
 
-CMD /start.sh
+CMD /phpv3.sh
